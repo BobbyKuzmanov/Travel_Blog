@@ -1,0 +1,20 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+    {% load bootstrap4 %}
+    <h1 class="text-center">Sign Up</h1>
+    <div class="raw d-flex justify-content-center">
+        <form method="post" class="post" action="{% url 'signup user' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in signup_form %}
+                {% bootstrap_field field %}
+            {% endfor %}
+<h3 style="color: seagreen">The below fields are not mandatory, you can always update them later</h3>
+            {% for field in profile_form %}
+                {% bootstrap_field field %}
+            {% endfor %}
+            {% buttons %}
+                <button type="submit" class="btn btn-outline-secondary">Sign Up</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
