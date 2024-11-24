@@ -1,20 +1,37 @@
 {% extends 'shared/base.html' %}
 {% block content %}
     {% load bootstrap4 %}
-    <h1 class="text-center">Are you sure?</h1>
-    <hr>
-    <div class="raw d-flex justify-content-center">
-        <div class="item">
-            <form method="POST" action="{% url 'destination delete' destination.id %}">
-                {% bootstrap_field form.title %}
-                {% bootstrap_field form.description %}
-                {% bootstrap_field form.country %}
-                {% bootstrap_field form.year %}
-                <div class="col text-center">
-                    <input type="submit" class="btn btn-danger" value="Yes"> / <a href="{% url 'destination list' %}" class="btn btn-success">No</a>
+    <div class="container">
+        <h1 class="text-center">Delete Travel Story</h1>
+        <hr>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
                 </div>
-                {% csrf_token %}
-            </form>
+            {% endfor %}
+        {% endif %}
+        
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <h5 class="card-title">Are you sure you want to delete "{{ destination.title }}"?</h5>
+                <p class="card-text text-muted">This action cannot be undone.</p>
+                
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <img src="{{ destination.image.url }}" class="img-fluid rounded mb-3" alt="{{ destination.title }}">
+                        
+                        <form method="POST" action="{% url 'destination delete' destination.id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger">Yes, Delete Story</button>
+                                <a href="{% url 'destination details' destination.id %}" class="btn btn-secondary ml-2">No, Keep Story</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

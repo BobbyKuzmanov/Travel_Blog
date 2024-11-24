@@ -11,6 +11,7 @@
                 {% bootstrap_field form.description %}
                 {% bootstrap_field form.country %}
                 {% bootstrap_field form.year %}
+                {% bootstrap_field form.category %}
                 {% bootstrap_field form.image %}
                 {% buttons %}
                     <button type="submit" class="btn btn-outline-secondary">Submit</button>
@@ -18,12 +19,11 @@
             </form>
         </div>
     {% else %}
-        <h5 class="text-center font-italic">Please sing up or sign in if you have a profile already,</h5>
+        <h5 class="text-center font-italic">Please sign up or sign in if you have a profile already,</h5>
         <h5 class="text-center font-italic">to add new story.</h5>
         <div class="col text-center">
             <a href="{% url 'signup user' %}" class="btn btn-outline-secondary">Sign Up</a> / <a
                 href="{% url 'signin user' %}" class="btn btn-outline-secondary">Sign In</a>
         </div>
     {% endif %}
-
 {% endblock %}
