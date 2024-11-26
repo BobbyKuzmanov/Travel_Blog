@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from Travel_blog.accounts.forms.profile import ProfileForm
 from Travel_blog.app.models import Destination
 
 
+@login_required
 def profile(request, pk=None):
     user = request.user if pk is None else User.objects.get(pk=pk)
     profile = user.profile
