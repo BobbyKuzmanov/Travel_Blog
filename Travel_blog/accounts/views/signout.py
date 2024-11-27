@@ -4,11 +4,11 @@ from django.shortcuts import redirect
 from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
 
-# @login_required
-# def signout_user(request):
-#     logout(request)
-#     return redirect('index')
-
 
 class SignOutView(LogoutView):
     next_page = reverse_lazy('index')
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            logout(request)
+        return redirect('index')

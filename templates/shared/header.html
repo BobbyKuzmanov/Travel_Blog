@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light" style="background-color: #3BBBD1FF ">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #6db1d5 ">
+    {% load static %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -6,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
             <li>
-                <img src="/media/favicon.ico" style="width:2.5em; height:2.5em;">
+                <img src="{% static 'images/navigation.png' %}" style="width:2.5em; height:2.5em;">
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home</a>
