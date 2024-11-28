@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from Travel_blog.app.forms.edit import EditDestinationForm
 from Travel_blog.app.models import Destination
-
+import os
 
 @login_required
 def destination_edit(request, pk):
@@ -28,9 +28,21 @@ def destination_edit(request, pk):
         }
         return render(request, 'app/destination_edit.html', context)
     else:
+        old_image_path = destination.image.path if destination.image else None
         form = EditDestinationForm(request.POST, request.FILES, instance=destination)
+        
         if form.is_valid():
+            # Check if a new image was uploaded
+            if 'image' in request.FILES:
+                # Delete old image if it exists
+                if old_image_path and os.path.exists(old_image_path):
+                    try:
+                        os.remove(old_image_path)
+                    except Exception as e:
+                        messages.warning(request, f"Could not remove old image: {str(e)}")
+            
             form.save()
+            messages.success(request, "Story updated successfully!")
             return redirect('destination details', destination.pk)
         else:
             context = {
