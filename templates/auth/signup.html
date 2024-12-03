@@ -1,20 +1,95 @@
 {% extends 'shared/base.html' %}
 {% block content %}
     {% load bootstrap4 %}
-    <h1 class="text-center">Sign Up</h1>
-    <div class="raw d-flex justify-content-center">
-        <form method="post" class="post" action="{% url 'signup user' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for field in signup_form %}
-                {% bootstrap_field field %}
-            {% endfor %}
-<h3 style="color: seagreen">The below fields are not mandatory, you can always update them later</h3>
-            {% for field in profile_form %}
-                {% bootstrap_field field %}
-            {% endfor %}
-            {% buttons %}
-                <button type="submit" class="btn btn-outline-secondary">Sign Up</button>
-            {% endbuttons %}
-        </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Sign Up</h2>
+                        
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        <form method="post" action="{% url 'signup user' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            {% if signup_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    {{ signup_form.non_field_errors }}
+                                </div>
+                            {% endif %}
+                            
+                            <div class="mb-4">
+                                <h5>Account Information</h5>
+                                <div class="form-group">
+                                    {{ signup_form.username.label_tag }}
+                                    {{ signup_form.username }}
+                                    {% if signup_form.username.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ signup_form.username.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">{{ signup_form.username.help_text }}</small>
+                                </div>
+                                
+                                <div class="form-group mt-3">
+                                    {{ signup_form.password1.label_tag }}
+                                    {{ signup_form.password1 }}
+                                    {% if signup_form.password1.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ signup_form.password1.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">{{ signup_form.password1.help_text }}</small>
+                                </div>
+                                
+                                <div class="form-group mt-3">
+                                    {{ signup_form.password2.label_tag }}
+                                    {{ signup_form.password2 }}
+                                    {% if signup_form.password2.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ signup_form.password2.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <small class="form-text text-muted">{{ signup_form.password2.help_text }}</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h5>Profile Information <small class="text-muted">(Optional)</small></h5>
+                                {% for field in profile_form %}
+                                    <div class="form-group mt-3">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                        {% if field.errors %}
+                                            <div class="alert alert-danger">
+                                                {{ field.errors }}
+                                            </div>
+                                        {% endif %}
+                                        {% if field.help_text %}
+                                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+                            </div>
+                            
+                            <div class="text-center mt-3">
+                                <p>Already have an account? <a href="{% url 'signin user' %}">Sign In</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
