@@ -11,7 +11,7 @@ class EditUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = UserModel
-        fields = '__all__'
+        fields = ('username',)
 
 
 class EditProfileForm(forms.ModelForm):
@@ -20,4 +20,4 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ('first_name', 'last_name', 'email', 'about_me', 'profile_image')
