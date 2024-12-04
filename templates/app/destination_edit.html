@@ -1,40 +1,46 @@
 {% extends 'shared/base.html' %}
 {% block content %}
     {% load bootstrap4 %}
-    <h1 class="text-center">Edit Travel Story</h1>
-    <hr>
-    <div class="raw d-flex justify-content-center">
-        <form method="post" action="{% url 'destination edit' destination.id %}" class="furniture-form" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% bootstrap_field form.title %}
-            {% bootstrap_field form.description %}
-            {% bootstrap_field form.country %}
-            {% bootstrap_field form.year %}
-            {% bootstrap_field form.category %}
-            
-            <div class="form-group">
-                <label>Current Image:</label>
-                <img id="img_preview" src="{{ destination.image.url }}" class="w-50 rounded mx-auto d-block mb-3" alt="Current image">
-                {% bootstrap_field form.image %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">Edit Travel Story</h1>
+                <hr>
+                <div class="row d-flex justify-content-center">
+                    <form method="post" action="{% url 'destination edit' destination.id %}" class="furniture-form w-100" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_field form.title %}
+                        {% bootstrap_field form.description %}
+                        {% bootstrap_field form.country %}
+                        {% bootstrap_field form.year %}
+                        {% bootstrap_field form.category %}
+                        
+                        <div class="form-group">
+                            <label>Current Image:</label>
+                            <img id="img_preview" src="{{ destination.image.url }}" class="w-50 rounded mx-auto d-block mb-3" alt="Current image">
+                            {% bootstrap_field form.image %}
+                        </div>
+                        
+                        <script>
+                            document.getElementById('img_input').onchange = function(event) {
+                                var img = document.getElementById('img_preview');
+                                if (event.target.files && event.target.files[0]) {
+                                    var reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        img.src = e.target.result;
+                                    };
+                                    reader.readAsDataURL(event.target.files[0]);
+                                }
+                            };
+                        </script>
+                        
+                        {% buttons %}
+                            <button type="submit" class="btn btn-outline-secondary">Save Changes</button>
+                            <a href="{% url 'destination details' destination.id %}" class="btn btn-outline-danger ml-2">Cancel</a>
+                        {% endbuttons %}
+                    </form>
+                </div>
             </div>
-            
-            <script>
-                document.getElementById('img_input').onchange = function(event) {
-                    var img = document.getElementById('img_preview');
-                    if (event.target.files && event.target.files[0]) {
-                        var reader = new FileReader();
-                        reader.onload = function(e) {
-                            img.src = e.target.result;
-                        };
-                        reader.readAsDataURL(event.target.files[0]);
-                    }
-                };
-            </script>
-            
-            {% buttons %}
-                <button type="submit" class="btn btn-outline-secondary">Save Changes</button>
-                <a href="{% url 'destination details' destination.id %}" class="btn btn-outline-danger ml-2">Cancel</a>
-            {% endbuttons %}
-        </form>
+        </div>
     </div>
 {% endblock %}

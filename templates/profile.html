@@ -2,7 +2,7 @@
 {% block content %}
     {% load bootstrap4 %}
     <div class="text-center">
-        <h1>Hi, {{ user.username }}!</h1>
+        <h1>{% if is_owner %}Hi, {% endif %}{{ user.username }}!</h1>
         {% if user.profile.profile_image %}
             <img class="rounded-circle mb-3" src="{{ user.profile.profile_image.url }}"
                  alt="Profile image"
@@ -17,13 +17,15 @@
         {% endif %}
         
         <div class="w-50 m-auto">
+            {% if is_owner %}
             <div class="mb-3">
                 <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit Profile</a>
             </div>
             
             <div class="mb-3">
-                <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete Profile</a>
+                <a href="{% url 'delete profile' user.id %}" class="btn btn-danger">Delete Profile</a>
             </div>
+            {% endif %}
             
             {% if user.profile.about_me %}
                 <div class="card mb-4">
@@ -35,7 +37,7 @@
             {% endif %}
             
             {% if destinations %}
-                <h3 class="mt-4">My Destinations</h3>
+                <h3 class="mt-4">{% if is_owner %}My{% else %}User's{% endif %} Destinations</h3>
                 <div class="row">
                     {% for destination in destinations %}
                         <div class="col-md-4 mb-4">

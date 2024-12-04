@@ -21,7 +21,7 @@
                     {% endif %}
                 </a>
             {% endif %}
-            {% if can_delete %}
+            {% if request.user == destination.user %}
                 <a href="{% url 'destination edit' destination.id %}" class="btn btn-success">Edit</a>
                 <a href="{% url 'destination delete' destination.id %}" class="btn btn-danger">Delete</a>
             {% endif %}
