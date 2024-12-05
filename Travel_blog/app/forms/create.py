@@ -3,12 +3,13 @@ from django.core.exceptions import ValidationError
 from Travel_blog.app.models import Destination
 import re
 
+
 class DestinationForm(forms.ModelForm):
     def clean_title(self):
         title = self.cleaned_data.get('title')
         if not title:
             raise ValidationError('Title is required.')
-        if len(title) < 5:
+        if len(title) < 3:
             raise ValidationError('Title must be at least 5 characters long.')
         if len(title) > 100:
             raise ValidationError('Title cannot exceed 100 characters.')
@@ -56,8 +57,8 @@ class DestinationForm(forms.ModelForm):
             'title': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Enter title (5-100 characters)',
-                    'minlength': '5',
+                    'placeholder': 'Enter title (3-100 characters)',
+                    'minlength': '3',
                     'maxlength': '100',
                     'required': True,
                 }

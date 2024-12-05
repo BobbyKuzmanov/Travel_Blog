@@ -13,7 +13,7 @@ class EditDestinationForm(forms.ModelForm):
         title = self.cleaned_data.get('title')
         if not title:
             raise ValidationError('Title is required.')
-        if len(title) < 5:
+        if len(title) < 3:
             raise ValidationError('Title must be at least 5 characters long.')
         if len(title) > 100:
             raise ValidationError('Title cannot exceed 100 characters.')
