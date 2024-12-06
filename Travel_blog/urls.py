@@ -7,4 +7,9 @@ urlpatterns = [
     path('accounts/', include('Travel_blog.accounts.urls')),
     path('admin/', admin.site.urls),
     path('', include('Travel_blog.app.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+handler404 = 'Travel_blog.app.views.error_views.handler404'
+
+if not settings.DEBUG:
+    pass
