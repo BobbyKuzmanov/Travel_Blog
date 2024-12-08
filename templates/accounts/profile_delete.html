@@ -1,0 +1,18 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+    <div class="container text-center">
+        <h1>Delete Profile</h1>
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Warning!</h4>
+            <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
+            <hr>
+            <p class="mb-0">All your travel stories and associated data will be permanently deleted.</p>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete My Profile</button>
+            <a href="{% url 'current user profile' %}" class="btn btn-secondary">No, Keep My Profile</a>
+        </form>
+    </div>
+{% endblock %}

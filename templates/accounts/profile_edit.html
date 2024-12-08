@@ -1,0 +1,41 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+    {% load bootstrap4 %}
+    <h1 class="text-center">Edit Your Profile</h1>
+    <hr>
+    <div class="raw d-flex justify-content-center">
+        <form method="post" action="{% url 'edit profile' %}" enctype="multipart/form-data" class="w-50">
+            {% csrf_token %}
+            <div class="form-group text-center mb-4">
+                {% if user.profile.profile_image %}
+                    <img src="{{ user.profile.profile_image.url }}"
+                         class="rounded-circle mb-3"
+                         width="140"
+                         height="140"
+                         alt="Current profile image">
+                {% else %}
+                    <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+                         class="rounded-circle mb-3"
+                         width="140"
+                         height="140"
+                         alt="Default profile image">
+                {% endif %}
+                <div class="custom-file">
+                    {{ profile_form.profile_image }}
+                    <label class="custom-file-label" for="{{ profile_form.profile_image.id_for_label }}">Choose profile image</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                {% bootstrap_field profile_form.first_name %}
+                {% bootstrap_field profile_form.last_name %}
+                {% bootstrap_field profile_form.email %}
+                {% bootstrap_field profile_form.about_me %}
+            </div>
+            
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
