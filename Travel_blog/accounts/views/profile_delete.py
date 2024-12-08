@@ -19,6 +19,6 @@ def delete_profile(request, pk):
             messages.success(request, 'Your profile has been successfully deleted.')
             return redirect('index')
         
-        return render(request, 'profile_delete.html')
+        return render(request, 'accounts/profile_delete.html')
     else:
         return redirect('index')

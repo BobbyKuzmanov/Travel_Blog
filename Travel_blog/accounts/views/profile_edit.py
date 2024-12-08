@@ -31,4 +31,4 @@ def edit_profile(request):
         'user': user,
         'profile_form': form,
     }
-    return render(request, 'profile_edit.html', context)
+    return render(request, 'accounts/profile_edit.html', context)

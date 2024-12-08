@@ -23,7 +23,7 @@ def profile(request, pk=None):
             'destinations': destinations,
             'is_owner': is_owner,
         }
-        return render(request, 'profile.html', context)
+        return render(request, 'accounts/profile.html', context)
     else:
         if not is_owner:
             messages.error(request, "You cannot modify another user's profile.")
