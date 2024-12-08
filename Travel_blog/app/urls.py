@@ -5,10 +5,10 @@ from Travel_blog.app.views.delete import destination_delete
 from Travel_blog.app.views.details import destination_details
 from Travel_blog.app.views.edit import destination_edit
 from Travel_blog.app.views.likes import destination_likes
-from Travel_blog.app.views.list import destination_list
+from Travel_blog.app.views.list import DestinationListView
 
 urlpatterns = [
-    path('list/', destination_list, name='destination list'),
+    path('list/', DestinationListView.as_view(), name='destination list'),
     path('details/<int:pk>/', destination_details, name='destination details'),
     path('edit/<int:pk>/', destination_edit, name='destination edit'),
     path('delete/<int:pk>/', destination_delete, name='destination delete'),
