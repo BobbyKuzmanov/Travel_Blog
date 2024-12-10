@@ -16,4 +16,5 @@ Once you're logged in you can review other people's stories. You can like them a
 
 Your own stories you can edit, delete but you can only see comments & likes, not modify them nor create such instances.
 
+Link to the website: https://travelblogapp.azurewebsites.net/
 I hope you enjoy this website.
