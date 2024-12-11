@@ -5,6 +5,7 @@ from django.contrib.auth.models import Group
 from django.contrib import messages
 from Travel_blog.accounts.models import Profile
 from Travel_blog.accounts.groups import create_admin_groups
+from django.db.models.signals import post_migrate
 
 UserModel = get_user_model()
 
@@ -80,8 +81,5 @@ class ProfileAdmin(admin.ModelAdmin):
 def create_groups(app_config, **kwargs):
     create_admin_groups()
 
-
-# Connect to the post_migrate signal
-from django.db.models.signals import post_migrate
 
 post_migrate.connect(create_groups)

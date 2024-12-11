@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.apps import apps
 import os
 
+
 @receiver(pre_delete, sender='auth.User')
 def cleanup_user_destinations(sender, instance, **kwargs):
     """
@@ -10,10 +11,10 @@ def cleanup_user_destinations(sender, instance, **kwargs):
     """
     # Get the Destination model
     Destination = apps.get_model('app', 'Destination')
-    
+
     # Get all destinations for this user
     destinations = Destination.objects.filter(user=instance)
-    
+
     # Delete all destination images
     for destination in destinations:
         if destination.image:
