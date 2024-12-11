@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Travel_blog.app.urls')),
     # Serve media files in production
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+ #   re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 
 # Serve static and media files in development
