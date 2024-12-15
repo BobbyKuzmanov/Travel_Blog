@@ -1,6 +1,5 @@
 # Travel_Blog
 
-Link to the website: https://travelblogapp.azurewebsites.net/
 
 This website is created by Borislav Kuzmanov as part of his studies in SoftUni.
 Django project presented as final exam project in Django Advanced.
